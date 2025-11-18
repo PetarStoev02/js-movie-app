@@ -1,6 +1,6 @@
 import "./App.css";
 import { Provider } from "react-redux";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Cards from "./components/Card/Cards";
 import MyMovies from "./components/FavoriteCards/MyMovies";
 import Filter from "./components/FilterMenu/Filter";

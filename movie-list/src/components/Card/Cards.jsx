@@ -46,36 +46,60 @@ export default function Cards() {
   return (
     <div>
       <SearchBar onSearchChange={handleSearchQueryChange} />
-      <Grid container spacing={2}>
-        {movies.map((movie) => (
-          <Grid item key={movie.id} xs={12} sm={6} md={4} lg={3}>
-            <Card sx={{ maxWidth: 400, maxHeight: 500 }}>
-              <CardContent>
-                <Typography
-                  component="p"
-                  sx={{ fontSize: 14 }}
-                  color="text.secondary"
-                  gutterBottom
-                >
-                  {movie.originalTitleText.text}
-                </Typography>
+      {movies.length === 0 ? (
+        <div style={{ padding: '20px', textAlign: 'center' }}>
+          <Typography variant="h6" color="text.secondary">
+            {searchQuery ? 'No movies found. Try a different search term.' : 'Loading movies...'}
+          </Typography>
+          {!searchQuery && (
+            <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
+              Make sure you have set up your OMDb API key in src/api/config.js
+            </Typography>
+          )}
+        </div>
+      ) : (
+        <Grid container spacing={2}>
+          {movies.map((movie) => (
+            <Grid item key={movie.id} xs={12} sm={6} md={4} lg={3}>
+              <Card sx={{ maxWidth: 400, maxHeight: 500 }}>
+                <CardContent>
+                  <Typography
+                    component="p"
+                    sx={{ fontSize: 14 }}
+                    color="text.secondary"
+                    gutterBottom
+                  >
+                    {movie.originalTitleText?.text || 'Unknown Title'}
+                  </Typography>
 
-                {movie.primaryImage && movie.primaryImage.url ? (
-                  <CardMedia
-                    component="img"
-                    height="300"
-                    image={movie.primaryImage.url}
-                    alt={movie.originalTitleText.text}
-                  />
-                ) : (
-                  <div>No image available</div>
-                )}
-              </CardContent>
-              <CardActionsComponent cardId={movie.id} />
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+                  {movie.primaryImage && movie.primaryImage.url ? (
+                    <CardMedia
+                      component="img"
+                      height="300"
+                      image={movie.primaryImage.url}
+                      alt={movie.originalTitleText?.text || 'Movie poster'}
+                      sx={{ objectFit: 'contain' }}
+                    />
+                  ) : (
+                    <div style={{ 
+                      height: '300px', 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      justifyContent: 'center',
+                      backgroundColor: '#f5f5f5'
+                    }}>
+                      <Typography variant="body2" color="text.secondary">
+                        No image available
+                      </Typography>
+                    </div>
+                  )}
+                </CardContent>
+                <CardActionsComponent cardId={movie.id} />
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      )}
     </div>
   );
 }
