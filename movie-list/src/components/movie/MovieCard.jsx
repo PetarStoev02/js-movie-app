@@ -35,11 +35,16 @@ const MovieCard = ({ movie, onClick }) => {
     onClick?.()
   }
 
+  const handleCardClick = () => {
+    onClick?.()
+  }
+
   return (
     <div
       className="relative flex-shrink-0 w-[150px] md:w-[200px] cursor-pointer group/card"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={handleCardClick}
     >
       {/* Base Card */}
       <div
