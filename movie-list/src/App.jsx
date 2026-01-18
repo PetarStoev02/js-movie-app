@@ -1,31 +1,20 @@
-import "./App.css";
 import { Provider } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import Cards from "./components/Card/Cards";
-import MyMovies from "./components/FavoriteCards/MyMovies";
-import Filter from "./components/FilterMenu/Filter";
 import store from "./store";
-import TabPanel from "./components/Header/TabPanel";
+import Navbar from "./components/layout/Navbar";
+import HomePage from "./pages/HomePage";
+import MyListPage from "./pages/MyListPage";
 
 export default function App() {
   return (
     <Provider store={store}>
-      <>
-        <TabPanel />
-
+      <div className="min-h-screen bg-netflix-black">
+        <Navbar />
         <Routes>
-          <Route path="/" element={<Cards />} />
-          <Route
-            path="/collection"
-            element={
-              <>
-                <Filter />
-                <MyMovies />
-              </>
-            }
-          />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/my-list" element={<MyListPage />} />
         </Routes>
-      </>
+      </div>
     </Provider>
   );
 }
