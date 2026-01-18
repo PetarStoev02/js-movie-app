@@ -1,47 +1,42 @@
-# Movie List App
+# MovieFlix - Netflix Clone
 
-A modern, interactive movie management application built with React and Redux. Browse popular movies, search for your favorites, and organize them into custom collections (Watched, Favorites, and Wishlist).
-
-🌐 **Live Demo:** [https://petarstoev02.github.io/js-movie-app/](https://petarstoev02.github.io/js-movie-app/)
+A Netflix-inspired movie streaming UI built with React, Tailwind CSS, and shadcn/ui. Browse movies, search for your favorites, and save them to your personal list.
 
 ## Features
 
-### 🎬 Movie Discovery
-- **Popular Movies**: Browse trending and popular movies from the OMDb API
-- **Search Functionality**: Real-time movie search with instant results
-- **Movie Details**: View comprehensive information about each movie including posters, titles, and descriptions
+### Netflix-Style UI
+- **Dark Theme**: Sleek black and red Netflix color palette
+- **Hero Section**: Featured movie billboard with gradient overlays
+- **Horizontal Carousels**: Browse movies by category with smooth scrolling
+- **Hover Effects**: Movie cards expand on hover to show details
+- **Responsive Design**: Works on desktop, tablet, and mobile
 
-### 📚 Personal Collections
-- **Favorites**: Save your favorite movies for quick access
-- **Watched**: Keep track of movies you've already watched
-- **Wishlist**: Plan your movie nights with a curated wishlist
+### Movie Discovery
+- **Multiple Categories**: Trending, Action, Sci-Fi, Classics, Comedy, Horror, Drama
+- **Real-Time Search**: Expandable search bar in the navbar
+- **Movie Details Modal**: Click any movie to see full info (rating, plot, cast, etc.)
 
-### 🔍 Advanced Filtering
-- Filter your personal collection by:
-  - All Movies
-  - Watched Movies
-  - Favorite Movies
-  - Wishlisted Movies
-
-### 🎨 Modern UI
-- Built with Material-UI (MUI) for a polished, responsive design
-- Clean and intuitive user interface
-- Mobile-friendly responsive layout
+### My List
+- **Save Movies**: Add movies to your personal list with one click
+- **Persistent Storage**: Your list is saved in localStorage
+- **Easy Management**: View and remove movies from your list
 
 ## Tech Stack
 
 - **React 18** - Modern React with hooks
-- **Redux Toolkit** - State management for movies and collections
+- **Tailwind CSS** - Utility-first CSS framework
+- **shadcn/ui** - Beautiful, accessible UI components
+- **Redux Toolkit** - State management
 - **React Router** - Client-side routing
-- **Material-UI (MUI)** - Component library for beautiful UI
-- **Vite** - Fast build tool and development server
-- **OMDb API** - The Open Movie Database API for movie data ([omdbapi.com](https://www.omdbapi.com/))
+- **Lucide React** - Beautiful icons
+- **Vite** - Fast build tool and dev server
+- **OMDb API** - Movie data from [omdbapi.com](https://www.omdbapi.com/)
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 16+ 
+- Node.js 16+
 - npm or yarn
 
 ### Installation
@@ -49,143 +44,124 @@ A modern, interactive movie management application built with React and Redux. B
 1. Clone the repository:
 ```bash
 git clone https://github.com/petarstoev02/js-movie-app.git
-cd js-movie-app
+cd js-movie-app/movie-list
 ```
 
-2. Navigate to the movie-list directory and install dependencies:
+2. Install dependencies:
 ```bash
-cd movie-list
 npm install
 ```
 
-3. Set up your OMDb API key (required):
-   - Get your free API key from [OMDb API](https://www.omdbapi.com/apikey.aspx)
-   - The free tier allows 1,000 requests per day
-   - Update the API key in `src/api/config.js`:
-     ```javascript
-     export const OMDB_API_KEY = 'your_api_key_here';
-     ```
-   - Or set it as an environment variable:
-     ```bash
-     # Create a .env file in the movie-list directory
-     VITE_OMDB_API_KEY=your_api_key_here
-     ```
+3. Set up environment variables:
+```bash
+# Copy the example env file
+cp .env.example .env
 
-4. Run the development server:
+# Edit .env and add your OMDb API key
+VITE_OMDB_API_KEY=your_api_key_here
+VITE_OMDB_BASE_URL=https://www.omdbapi.com/
+```
+
+4. Get your free OMDb API key:
+   - Visit [OMDb API](https://www.omdbapi.com/apikey.aspx)
+   - Select the "FREE" plan (1,000 requests/day)
+   - Enter your email and activate via the confirmation link
+
+5. Start the development server:
 ```bash
 npm run dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser
+6. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ## Project Structure
 
 ```
-js-movie-app/
-├── movie-list/
-│   ├── src/
-│   │   ├── api/                    # API integration files
-│   │   │   ├── config.js           # OMDb API configuration
-│   │   │   ├── moviesAPI.jsx       # Fetch popular movies
-│   │   │   ├── searchMoviesAPI.jsx # Search movies
-│   │   │   ├── serverAPI.jsx       # Server operations
-│   │   │   └── getMoviesByListType.jsx
-│   │   ├── components/
-│   │   │   ├── Card/               # Movie card components
-│   │   │   ├── FavoriteCards/      # Collection management
-│   │   │   ├── FilterMenu/         # Filter component
-│   │   │   ├── Header/             # Navigation tabs
-│   │   │   └── SearchBar/          # Search functionality
-│   │   ├── reducers/               # Redux reducers
-│   │   │   ├── movieReducer.jsx
-│   │   │   ├── favoriteMoviesReducer.jsx
-│   │   │   ├── watchedMoviesReducer.jsx
-│   │   │   ├── wishlistedMoviesReducer.jsx
-│   │   │   ├── searchReducer.jsx
-│   │   │   ├── filterReducer.jsx
-│   │   │   └── tabReducer.jsx
-│   │   ├── store.jsx               # Redux store configuration
-│   │   ├── rootReducer.jsx         # Combined reducers
-│   │   ├── App.jsx                 # Main app component
-│   │   └── main.jsx                # Entry point
-│   ├── public/
-│   ├── package.json
-│   └── vite.config.js
-└── README.md
+movie-list/
+├── src/
+│   ├── api/
+│   │   ├── config.js              # API configuration (env vars)
+│   │   └── moviesAPI.jsx          # Movie fetching functions
+│   ├── components/
+│   │   ├── ui/                    # shadcn/ui components
+│   │   │   ├── button.jsx
+│   │   │   ├── input.jsx
+│   │   │   ├── dialog.jsx
+│   │   │   ├── tabs.jsx
+│   │   │   └── skeleton.jsx
+│   │   ├── layout/
+│   │   │   └── Navbar.jsx         # Netflix-style navbar
+│   │   ├── hero/
+│   │   │   └── HeroSection.jsx    # Featured movie billboard
+│   │   ├── carousel/
+│   │   │   └── MovieCarousel.jsx  # Horizontal movie carousel
+│   │   └── movie/
+│   │       ├── MovieCard.jsx      # Movie card with hover
+│   │       └── MovieModal.jsx     # Movie details modal
+│   ├── pages/
+│   │   ├── HomePage.jsx           # Main browse page
+│   │   └── MyListPage.jsx         # User's saved movies
+│   ├── reducers/
+│   │   ├── myListReducer.jsx      # My List state (localStorage)
+│   │   └── searchReducer.jsx      # Search query state
+│   ├── lib/
+│   │   └── utils.js               # Utility functions (cn)
+│   ├── App.jsx                    # Main app with routes
+│   ├── rootReducer.jsx            # Combined Redux reducers
+│   ├── store.jsx                  # Redux store
+│   ├── main.jsx                   # Entry point
+│   └── index.css                  # Tailwind + custom styles
+├── .env.example                   # Environment variables template
+├── tailwind.config.js             # Tailwind configuration
+├── postcss.config.js              # PostCSS configuration
+├── vite.config.js                 # Vite configuration
+└── package.json
 ```
+
+## Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `VITE_OMDB_API_KEY` | Your OMDb API key | Yes |
+| `VITE_OMDB_BASE_URL` | OMDb API base URL | No (defaults to https://www.omdbapi.com/) |
 
 ## Usage
 
-### Browsing Movies
-1. Navigate to the "Movie List" tab
-2. Browse popular movies displayed in a grid layout
-3. Use the search bar to find specific movies
+### Browse Movies
+- Scroll through different movie categories on the home page
+- Use the left/right arrows to navigate carousels
 
-### Managing Collections
-1. Click on any movie card to view actions
-2. Add movies to:
-   - **Favorites**: Click the favorite icon
-   - **Watched**: Mark movies you've seen
-   - **Wishlist**: Save movies for later
+### Search
+- Click the search icon in the navbar
+- Type to search for movies in real-time
+- Results appear in a grid below
 
-### Viewing Your Collection
-1. Navigate to the "My Movies" tab
-2. Use the filter dropdown to view:
-   - All your saved movies
-   - Only watched movies
-   - Only favorite movies
-   - Only wishlisted movies
+### View Movie Details
+- Click on any movie poster to open the details modal
+- See rating, plot, cast, director, awards, and more
+
+### My List
+- Click "Add to My List" in the movie modal
+- Or use the + button on movie cards
+- View your saved movies at `/my-list`
+- Remove movies by clicking the trash icon
 
 ## Building for Production
 
 ```bash
-cd movie-list
 npm run build
 ```
 
 The production build will be created in the `dist` directory.
 
-## Deployment
+## Scripts
 
-This project is automatically deployed to GitHub Pages using GitHub Actions. The live version is available at:
-[https://petarstoev02.github.io/js-movie-app/](https://petarstoev02.github.io/js-movie-app/)
-
-### Manual Deployment
-
-To deploy manually:
-
-1. Build the project:
-```bash
-cd movie-list
-npm run build
-```
-
-2. Deploy the `dist` folder to your hosting service
-
-## API Configuration
-
-The app uses the [OMDb API](https://www.omdbapi.com/) (The Open Movie Database). To set up your API key:
-
-1. Visit [OMDb API Key Registration](https://www.omdbapi.com/apikey.aspx)
-2. Select the "FREE" plan (1,000 requests per day)
-3. Enter your email address
-4. Check your email and click the activation link
-5. Copy your API key
-
-Then update the API key in `src/api/config.js`:
-
-```javascript
-export const OMDB_API_KEY = 'your_api_key_here';
-```
-
-Or use an environment variable (recommended for production):
-
-Create a `.env` file in the `movie-list` directory:
-```
-VITE_OMDB_API_KEY=your_api_key_here
-```
-
-**Note:** The API key is required for the app to function. Without a valid key, movie searches and listings will not work.
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server on port 3000 |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview production build |
+| `npm run lint` | Run ESLint |
 
 ## Browser Support
 
@@ -196,7 +172,7 @@ VITE_OMDB_API_KEY=your_api_key_here
 
 ## Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
+Contributions are welcome! Feel free to open issues or submit pull requests.
 
 ## License
 
@@ -204,4 +180,4 @@ This project is open source and available under the MIT License.
 
 ---
 
-**Built with ❤️ using React, Redux, and Material-UI**
+**Built with React, Tailwind CSS, and shadcn/ui**
